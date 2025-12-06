@@ -1,0 +1,32 @@
+export const lawyers = [
+  {
+    slug: "maitre-borgel",
+    name: "Maître Borgel",
+    role: "Associé fondateur",
+    speciality: "Droit des affaires & contentieux complexes",
+    experience: "20+ ans d’expérience",
+    bio: "Maître Borgel accompagne dirigeants et entreprises dans leurs décisions stratégiques et la gestion de leurs risques juridiques, en France et à l’international.",
+    image: "/images/lawyers/borgel.jpg", 
+    badges: ["Stratégie", "Contentieux complexe"],
+  },
+  {
+    slug: "maitre-dupont",
+    name: "Maître Dupont",
+    role: "Avocat associé",
+    speciality: "Droit du travail",
+    experience: "12 ans d’expérience",
+    bio: "Intervient en conseil comme en contentieux sur l’ensemble des problématiques liées aux relations individuelles et collectives de travail.",
+    image: "/images/lawyers/dupont.jpg",
+    badges: ["Social", "Relations collectives"],
+  },
+  {
+    slug: "maitre-ben-ali",
+    name: "Maître Ben Ali",
+    role: "Avocat",
+    speciality: "Droit pénal des affaires",
+    experience: "8 ans d’expérience",
+    bio: "Assiste les dirigeants et entreprises dans les procédures pénales sensibles, en particulier en matière de droit pénal économique et financier.",
+    image: "/images/lawyers/benali.jpg",
+    badges: ["Pénal des affaires", "Compliance"],
+  },
+];

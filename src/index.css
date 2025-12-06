@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Momo+Trust+Display&family=Science+Gothic:wght@100..900&display=swap');
+@import "tailwindcss";
+@plugin "daisyui";
+
+ 
+@theme {
+  --breakpoint-1100: 1055px;
+  --color-primary: #00412E;
+  --color-primary-second: #272d50;
+  --color-primary-soft: #96bf8a;
+  --color-bg-light: #ffffff;
+  --color-bg-dark: #E8EAE5;
+  --color-text-light: #E8EAE5 ;
+  --color-principale :#68BBE3;
+  --color-secondary :#0e86d4;
+  --color-tertiary :#055c9d;
+  --color-quartio :#003060;
+  --text-kely:10px;
+}
