@@ -17,4 +17,16 @@ export const testimonials = [
     quote:
       "Réactivité, pédagogie et efficacité dans la gestion de nos dossiers en droit social.",
   },
+  {
+    id: 4,
+    name: "DRH d’un groupe de services",
+    quote:
+      "Réactivité, pédagogie et efficacité dans la gestion de nos dossiers en droit social.",
+  },
+  {
+    id: 5,
+    name: "DRH d’un groupe de services",
+    quote:
+      "Réactivité, pédagogie et efficacité dans la gestion de nos dossiers en droit social.",
+  },
 ];

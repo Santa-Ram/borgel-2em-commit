@@ -12,6 +12,7 @@ import CabinetPage from "./pages/CabinetPage";
 import ContentieuxPage from "./pages/ContentieuxPage";
 import "./index.css";
 import FaqPage from "./pages/FaqPage";
+import HonorairesPage from "./pages/honorairesPage";
 
 function App() {
   return (
@@ -36,8 +37,10 @@ function App() {
 
         <Route path="/actualites-juridiques" element={<ActualitesPage />} />
         <Route path="/actualites/:slug" element={<ActualiteDetailPage />} />
+        
 
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="/honoraires" element={<HonorairesPage />} />
       </Routes>
     </MainLayout>
   );

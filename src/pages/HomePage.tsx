@@ -3,6 +3,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import type { Variants } from "framer-motion";
+import logoBa from "../assets/logoBlanc.png";
+import imgEquipeR from "../assets/imhero-ba.png";
 
 import { Link } from "react-router-dom";
 import {
@@ -25,6 +27,7 @@ import {
   BookOpen,
   Award,
   Building2,
+  BadgeCheck,
 } from "lucide-react";
 
 import { expertises } from "../data/expertises";
@@ -34,6 +37,11 @@ import { testimonials } from "../data/testimonials";
 
 import photoCabinet from "../assets/photoCabinet.png";
 import equipeHero from "../assets/imhero-ba.png";
+import SectionBlog from "../components/section-article";
+import { img, path } from "motion/react-client";
+import ProcessSection from "../components/ProcessSection";
+import ReparationSection from "../components/reparationSection";
+import SupportCenterSection from "../components/SupportCenterSection";
 
 type Direction = 1 | -1;
 
@@ -59,19 +67,18 @@ const staggerContainer: Variants = {
 const heroSlides = [
   {
     id: 1,
-    label: "Disponibilité",
-    badge: "Réponse sous 24h",
+    label: "Notre objectif :",
+    badge: "Accident de la Circulation",
     quote:
-      "Notre mission : transformer vos contraintes juridiques en leviers de sécurité et de performance durable.",
+      "La reconnaissance de votre droit à indemnisation. Face à un événement traumatisant et souvent...",
     line1: "Borgel & Associés – Marseille",
     line2: "Contentieux complexes · Conseil stratégique",
   },
   {
     id: 2,
-    label: "Accompagnement",
-    badge: "Suivi personnalisé",
-    quote:
-      "Chaque dossier bénéficie d’un suivi individuel, avec un interlocuteur dédié à chaque étape.",
+    label: "Notre objectif :",
+    badge: "Droit de la santé",
+    quote: "Le dossier médicale, Propriété sacrée du patient en 4 étapes",
     line1: "Proximité & transparence",
     line2: "Compte-rendus réguliers · Pédagogie juridique",
   },
@@ -226,10 +233,29 @@ const faqs = [
 
 // Chiffres clés
 const stats = [
-  { label: "Années d’expérience", value: "20+" },
-  { label: "Dossiers indemnisés", value: "1 000+" },
-  { label: "Taux de fidélisation", value: "95%" },
-  { label: "Délai moyen de réponse", value: "-24h" },
+  {
+    label:
+      "Communément appelé accident de la voie publique, accident de la route ou accident de voiture (auto, moto, passager, piéton, cycliste, camion, tracteur, engin agricole…)",
+    value: "Accident de la circulation",
+  },
+  {
+    label:
+      "Ou de dommages résultant d’une infraction (blessures involontaires ou volontaires, violences, vol avec violences, vol à main armée, agressions sexuelles…)",
+    value: "Agression",
+  },
+  {
+    label: "Aléa thérapeutique, infections nosocomiales, erreurs médicales",
+    value: "Accident médical",
+  },
+  {
+    label: "Faute inexcusable de l’employeur, responsabilité d’un tiers…",
+    value: "Accident du travail",
+  },
+  {
+    label:
+      "Ou d'un accident causé par un tiers (ski, chasse, sport, accident domestique, accident ménager, chute dans un lieu public, chute dans une grande surface ou un supermarché, morsure de chien, brulures, intoxications…)",
+    value: "Accident de la vie courante",
+  },
 ];
 
 export default function HomePage() {
@@ -282,26 +308,42 @@ export default function HomePage() {
   }, []);
 
   return (
-    <main className="bg-ba-navy text-white">
+    <main className="w-full text-white ">
       {/* HERO */}
       <section
         id="hero"
         aria-labelledby="hero-heading"
-        className="relative flex justify-center h-175 m-4 rounded-xl overflow-hidden"
+        className="relative isolate flex justify-center bg-gray-900 z-0 h-flex lg:h-150 overflow-hidden"
       >
-        {/* Image de fond */}
+        {/* Forme floue (gauche) — clip-path via style object */}
         <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `url(${equipeHero})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        />
-        <div className="absolute inset-0 bg-black/70" />
+          aria-hidden="true"
+          className="hidden sm:absolute sm:-top-10 sm:right-1/2 z-10 sm:mr-10 sm:block sm:transform-gpu sm:blur-3xl"
+        >
+          <div
+            style={{
+              clipPath:
+                "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
+            }}
+            className="w-[550px] aspect-1097/845 bg-linear-to-tr from-[#ff4694] to-[#776fff] opacity-50"
+          />
+        </div>
 
-        <div className="relative w-full max-w-6xl lg:max-w-7xl mx-auto px-[5vw] py-20 lg:py-28 flex flex-col lg:flex-row items-center lg:items-start gap-12 lg:gap-16">
-          {/* Bloc gauche */}
+        {/* Forme floue (centre/top) */}
+        <div
+          aria-hidden="true"
+          className="absolute -top-52 left-1/2 z-10 -translate-x-1/2 transform-gpu blur-3xl sm:-top-28 sm:ml-16 sm:translate-x-0"
+        >
+          <div
+            style={{
+              clipPath:
+                "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
+            }}
+            className="w-[550px] aspect-1097/845 bg-linear-to-tr from-[#ff4694] to-[#776fff] opacity-40"
+          />
+        </div>
+
+        <div className="relative z-10 w-full max-w-6xl lg:max-w-7xl mx-auto lg:mx-5 px-[1vw] py-20 lg:pt-50 flex flex-col lg:flex-row items-center lg:items-start gap-5 lg:gap-16">
           <motion.div
             className="flex-1 text-center lg:text-left"
             initial="hidden"
@@ -344,7 +386,7 @@ export default function HomePage() {
               >
                 <Link
                   to="/contact"
-                  className="inline-flex btn items-center gap-2 rounded-full bg-ba-gold px-6 py-3 text-sm sm:text-base font-semibold text-ba-navy shadow-soft-xl hover:bg-ba-gold-soft transition"
+                  className="inline-flex btn items-center gap-2 rounded-full bg-emerald-500/15 text-emerald-300 px-6 py-3 text-sm sm:text-base font-semibold shadow-soft-xl hover:bg-ba-gold-soft transition"
                 >
                   Prendre rendez-vous
                   <ArrowRight className="w-4 h-4" />
@@ -380,7 +422,6 @@ export default function HomePage() {
             </motion.div>
           </motion.div>
 
-          {/* Bloc droit : carte slider premium */}
           <motion.div
             className="flex-1 w-full sm:max-w-md max-w-xs mx-auto lg:mx-0 transform scale-95 sm:scale-100"
             initial={{ opacity: 0, x: 40 }}
@@ -449,9 +490,7 @@ export default function HomePage() {
                 </motion.div>
               </AnimatePresence>
 
-              {/* Contrôles slider */}
               <div className="mt-5 flex items-center justify-between gap-3">
-                {/* Flèches */}
                 <div className="flex items-center gap-2">
                   <button
                     type="button"
@@ -479,7 +518,6 @@ export default function HomePage() {
                   </button>
                 </div>
 
-                {/* Indicateurs */}
                 <div className="flex items-center gap-1.5">
                   {heroSlides.map((slide, index) => (
                     <button
@@ -509,90 +547,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* PRÉSENTATION DU CABINET + CHIFFRES CLÉS */}
-      <section className="py-16 lg:py-20">
-        <div className="w-full max-w-6xl lg:max-w-7xl mx-auto px-[5vw] grid gap-12 md:grid-cols-[1.1fr,minmax(0,0.9fr)] items-center">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={staggerContainer}
-          >
-            <motion.p
-              variants={fadeUp}
-              className="text-sm uppercase tracking-[0.25em] text-ba-gold-soft mb-3 text-center md:text-left"
-            >
-              Le Cabinet
-            </motion.p>
-            <motion.h2
-              variants={fadeUp}
-              className="font-serif text-2xl sm:text-3xl md:text-4xl mb-4 text-center md:text-left text-quartio"
-            >
-              Un cabinet d’excellence dédié aux situations à forts enjeux.
-            </motion.h2>
-            <motion.p
-              variants={fadeUp}
-              className="text-sm md:text-base text-black/70 mb-4 text-center md:text-left"
-            >
-              Borgel &amp; Associés accompagne victimes, familles et entreprises
-              en conseil comme en contentieux, avec une exigence constante de
-              rigueur et de pédagogie juridique.
-            </motion.p>
-            <motion.p
-              variants={fadeUp}
-              className="text-sm md:text-base text-black/60 mb-8 text-center md:text-left"
-            >
-              Transparence, réactivité et vision stratégique guident l’ensemble
-              de nos interventions, dans la durée.
-            </motion.p>
-
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-              {stats.map((item, idx) => (
-                <motion.div
-                  key={item.label}
-                  custom={idx}
-                  variants={fadeUp}
-                  className="rounded-2xl border border-white/10 bg-quartio/5 px-4 py-4 text-quartio"
-                >
-                  <p className="text-ba-gold text-lg font-semibold">
-                    {item.value}
-                  </p>
-                  <p className="text-xs text-black/60">{item.label}</p>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.8 }}
-          >
-            <div className="relative rounded-3xl overflow-hidden border border-ba-gold/20 bg-black h-full min-h-[260px]">
-              <img
-                src={photoCabinet}
-                alt="Cabinet Borgel & Associés"
-                className="w-full h-full object-cover opacity-85"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
-              <div className="absolute bottom-4 left-4 right-4 text-xs text-white/80">
-                <p className="font-serif text-sm">
-                  Borgel &amp; Associés – Cabinet d’avocats
-                </p>
-                <p className="text-white/60">
-                  Un partenaire juridique engagé aux côtés des victimes et des
-                  entreprises.
-                </p>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
       {/* POURQUOI NOUS CHOISIR */}
-      <section className="py-16 lg:py-20 bg-ba-navy/95">
-        <div className="w-full max-w-6xl lg:max-w-7xl mx-auto px-[5vw]">
+      <section className="py-8 lg:py-10 bg-ba-navy/95">
+        <div className="w-full max-w-7xl mx-auto px-[3vw]">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -601,15 +558,15 @@ export default function HomePage() {
           >
             <motion.div
               variants={fadeUp}
-              className="text-center max-w-2xl mx-auto mb-10"
+              className="text-center max-w-5xl mx-auto mb-10"
             >
-              <p className="text-sm uppercase tracking-[0.25em] text-ba-gold-soft mb-3">
+              <p className="text-sm uppercase tracking-[0.25em] text-black mb-3">
                 Pourquoi nous choisir ?
               </p>
-              <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl mb-3">
+              <h2 className="font-serif text-2xl text-quartio sm:text-3xl md:text-5xl mb-3">
                 Une approche exigeante, tournée vers l’humain.
               </h2>
-              <p className="text-sm md:text-base text-white/75">
+              <p className="text-sm md:text-base text-black/75">
                 Au-delà du droit, nous plaçons l’écoute, la clarté et la
                 stratégie au cœur de notre accompagnement.
               </p>
@@ -620,26 +577,36 @@ export default function HomePage() {
                 <motion.article
                   key={reason.id}
                   variants={fadeUp}
-                  className="rounded-2xl bg-white/5 border border-white/10 p-5 flex flex-col gap-3 shadow-soft-xl hover:border-ba-gold/80 transition"
+                  className="rounded-2xl bg-black/5 border border-black/10 p-5 flex flex-col gap-3 shadow-soft-xl hover:border-ba-gold/80 transition"
                 >
-                  <div className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-ba-gold/10 text-ba-gold mb-1">
+                  <div className="inline-flex h-9 w-9 items-center text-black justify-center rounded-full bg-ba-gold/10 text-ba-gold mb-1">
                     {reason.icon}
                   </div>
-                  <h3 className="font-semibold text-sm sm:text-base">
+                  <h3 className="font-semibold text-black text-sm sm:text-base">
                     {reason.title}
                   </h3>
-                  <p className="text-xs sm:text-sm text-white/70">
+                  <p className="text-xs sm:text-sm text-black/70">
                     {reason.description}
                   </p>
                 </motion.article>
               ))}
             </div>
+            <div className="flex justify-center bg-white p-6 pt-5 md:pt-10">
+              <button className="flex justify-center btn-sm font-bold items-center gap-2 btn-neutral border py-1 px-3 rounded-full text-black hover:bg-quartio hover:text-white">
+                Voir Plus<span aria-hidden="true">&rarr;</span>
+              </button>
+            </div>
           </motion.div>
         </div>
       </section>
 
+      {/* Réparation du préjudice corporel: */}
+      <section className="bg-white ">
+        <ReparationSection />
+      </section>
+
       {/* EXPERTISES */}
-      <section id="expertises" className="py-16 lg:py-20 bg-black/40">
+      <section id="expertises" className="py-6 lg:py-10 bg-white/40">
         <div className="w-full max-w-6xl lg:max-w-7xl mx-auto px-[5vw]">
           <motion.div
             initial="hidden"
@@ -652,13 +619,13 @@ export default function HomePage() {
               className="mb-10 flex flex-col md:flex-row items-center md:items-end justify-between gap-4"
             >
               <div className="text-center md:text-left">
-                <p className="text-sm uppercase tracking-[0.25em] text-ba-gold-soft mb-2">
+                <p className="text-sm uppercase tracking-[0.25em] text-black mb-2">
                   Expertises
                 </p>
-                <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl">
+                <h2 className="font-serif text-quartio text-2xl sm:text-3xl md:text-4xl">
                   Nos domaines d’intervention.
                 </h2>
-                <p className="text-sm md:text-base text-white/65 mt-3 max-w-2xl">
+                <p className="text-sm md:text-base text-black/65 mt-3 max-w-2xl">
                   Une expertise transversale au service des victimes, des
                   dirigeants et des entreprises confrontés à des enjeux
                   sensibles.
@@ -666,7 +633,7 @@ export default function HomePage() {
               </div>
               <Link
                 to="/expertises"
-                className="hidden sm:inline-flex text-xs rounded-full border border-white/25 px-4 py-2 hover:border-ba-gold hover:text-ba-gold transition"
+                className="hidden text-black sm:inline-flex text-xs rounded-full border border-black/25 px-4 py-2 hover:border-ba-gold hover:text-ba-gold transition"
               >
                 Voir toutes les expertises
               </Link>
@@ -678,7 +645,7 @@ export default function HomePage() {
                   key={exp.id}
                   custom={idx}
                   variants={fadeUp}
-                  className="group h-full"
+                  className="group rounded-2xl h-full"
                   whileHover={{
                     y: -6,
                     boxShadow: "0 20px 40px rgba(0,0,0,0.35)",
@@ -686,20 +653,20 @@ export default function HomePage() {
                 >
                   <Link
                     to={`/expertises/${exp.id}`}
-                    className="flex h-full flex-col rounded-2xl border border-white/10 bg-white/5 p-5 hover:border-ba-gold/70 hover:bg-white/10 transition"
+                    className="flex h-full flex-col rounded-2xl border border-black/30 bg-white/5 p-5 hover:border-ba-gold/10 hover:bg-white/10 transition-shadow shadow-lg"
                   >
                     <div className="flex items-center justify-between mb-3">
-                      <h3 className="font-serif text-lg group-hover:text-ba-gold">
+                      <h3 className="font-serif text-black text-lg group-hover:text-ba-gold">
                         {exp.title}
                       </h3>
-                      <div className="h-8 w-8 rounded-full border border-ba-gold/40 flex items-center justify-center text-[10px] text-ba-gold/80">
-                        §
+                      <div className="h-8 w-8 rounded-full hover:bg-emerald-500/15 text-emerald-300 flex items-center justify-center text-[10px] text-black/80">
+                        <BadgeCheck />
                       </div>
                     </div>
-                    <p className="text-xs text-white/65 mb-4">
+                    <p className="text-xs text-black/65 mb-4">
                       {exp.shortDescription}
                     </p>
-                    <span className="mt-auto text-xs text-ba-gold/80 group-hover:text-ba-gold">
+                    <span className="mt-auto text-black/80 group-hover:text-ba-gold">
                       En savoir plus →
                     </span>
                   </Link>
@@ -710,197 +677,15 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* PROCESSUS D’ACCOMPAGNEMENT */}
-      <section className="py-16 lg:py-20 bg-ba-navy/95">
-        <div className="w-full max-w-6xl lg:max-w-7xl mx-auto px-[5vw]">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={staggerContainer}
-          >
-            <motion.div
-              variants={fadeUp}
-              className="text-center max-w-2xl mx-auto mb-10"
-            >
-              <p className="text-sm uppercase tracking-[0.25em] text-ba-gold-soft mb-3">
-                Processus d’accompagnement
-              </p>
-              <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl mb-3">
-                Un parcours clair, à vos côtés à chaque étape.
-              </h2>
-              <p className="text-sm md:text-base text-white/75">
-                De la première prise de contact à l’indemnisation, nous
-                structurons chaque phase pour vous offrir lisibilité et
-                sécurité.
-              </p>
-            </motion.div>
-
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
-              {processSteps.map((step, index) => (
-                <motion.article
-                  key={step.id}
-                  variants={fadeUp}
-                  className="rounded-2xl bg-white/5 border border-white/10 p-5 flex flex-col gap-3 shadow-soft-xl"
-                >
-                  <div className="flex items-center gap-2 mb-1">
-                    <div className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-ba-gold text-ba-navy text-xs font-semibold">
-                      {index + 1}
-                    </div>
-                    <h3 className="font-semibold text-sm sm:text-base">
-                      {step.title}
-                    </h3>
-                  </div>
-                  <p className="text-xs sm:text-sm text-white/70">
-                    {step.description}
-                  </p>
-                </motion.article>
-              ))}
-            </div>
-          </motion.div>
-        </div>
+      <section>
+        <ProcessSection />
       </section>
 
-      {/* DOMAINES PHARES */}
-      <section className="py-16 lg:py-20 bg-ba-navy">
-        <div className="w-full max-w-6xl lg:max-w-7xl mx-auto px-[5vw]">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={staggerContainer}
-          >
-            <motion.div
-              variants={fadeUp}
-              className="flex flex-col lg:flex-row items-center lg:items-end justify-between gap-4 mb-8"
-            >
-              <div className="text-center lg:text-left max-w-2xl">
-                <p className="text-sm uppercase tracking-[0.25em] text-ba-gold-soft mb-3">
-                  Domaines phares
-                </p>
-                <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl mb-3">
-                  Quelques exemples de situations que nous traitons.
-                </h2>
-                <p className="text-sm md:text-base text-white/75">
-                  Nous intervenons dans des dossiers marqués par une forte
-                  dimension humaine, médicale, économique ou réputationnelle.
-                </p>
-              </div>
-            </motion.div>
-
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
-              {keyCases.map((item) => (
-                <motion.article
-                  key={item.id}
-                  variants={fadeUp}
-                  className="rounded-2xl bg-white/5 border border-white/10 p-5 flex flex-col gap-3 hover:border-ba-gold/80 hover:-translate-y-1.5 transition shadow-soft-xl"
-                >
-                  <div className="flex items-center gap-2 text-ba-gold mb-1 text-xs font-semibold">
-                    <CheckCircle2 className="w-4 h-4" />
-                    <span>Cas d’intervention</span>
-                  </div>
-                  <h3 className="font-semibold text-sm sm:text-base">
-                    {item.title}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-white/70">
-                    {item.description}
-                  </p>
-                </motion.article>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ÉQUIPE */}
-      <section id="equipe" className="py-16 lg:py-20 bg-ba-navy/95">
-        <div className="w-full max-w-6xl lg:max-w-7xl mx-auto px-[5vw]">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={staggerContainer}
-          >
-            <motion.div
-              variants={fadeUp}
-              className="mb-10 flex flex-col md:flex-row items-center md:items-end justify-between gap-4"
-            >
-              <div className="text-center md:text-left">
-                <p className="text-sm uppercase tracking-[0.25em] text-ba-gold-soft mb-2">
-                  L’équipe
-                </p>
-                <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl">
-                  Des avocats engagés à vos côtés.
-                </h2>
-                <p className="text-sm md:text-base text-white/65 mt-3 max-w-2xl">
-                  Une équipe complémentaire, disponible et mobilisée, pour
-                  porter votre dossier avec rigueur et humanité.
-                </p>
-              </div>
-              <Link
-                to="/equipe"
-                className="hidden sm:inline-flex text-xs rounded-full border border-white/25 px-4 py-2 hover:border-ba-gold hover:text-ba-gold transition"
-              >
-                Voir toute l’équipe
-              </Link>
-            </motion.div>
-
-            <div className="grid gap-6 md:grid-cols-3">
-              {lawyers.map((lawyer, idx) => (
-                <motion.div
-                  key={lawyer.slug}
-                  custom={idx}
-                  variants={fadeUp}
-                  className="h-full"
-                >
-                  <Link
-                    to={`/avocats/${lawyer.slug}`}
-                    className="group rounded-2xl border border-white/10 bg-white/5 overflow-hidden hover:border-ba-gold/70 transition flex flex-col h-full"
-                  >
-                    <div className="relative aspect-[4/5] overflow-hidden">
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10" />
-                      <img
-                        src={
-                          lawyer.image ||
-                          "https://images.pexels.com/photos/5668516/pexels-photo-5668516.jpeg?auto=compress&cs=tinysrgb&w=1200"
-                        }
-                        alt={lawyer.name}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                      />
-                      <div className="absolute bottom-4 left-4 right-4 z-20">
-                        <p className="text-xs text-white/70">{lawyer.role}</p>
-                        <p className="font-serif text-lg">{lawyer.name}</p>
-                      </div>
-                    </div>
-                    <div className="p-4 flex flex-col gap-2 flex-1">
-                      <p className="text-xs text-white/60">
-                        {lawyer.speciality}
-                      </p>
-                      <p className="text-xs text-white/50">
-                        {lawyer.experience}
-                      </p>
-                      <div className="flex flex-wrap gap-2 mt-auto pt-3">
-                        {lawyer.badges?.map((badge: string) => (
-                          <span
-                            key={badge}
-                            className="text-[10px] rounded-full border border-white/15 px-2 py-1 text-white/60"
-                          >
-                            {badge}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      
 
       {/* TÉMOIGNAGES */}
-      <section className="py-16 lg:py-20 bg-ba-navy">
-        <div className="w-full max-w-4xl mx-auto px-[5vw] text-center">
+      <section className="py-16 lg:py-20 bg-gray-900">
+        <div className="w-full max-w-8xl mx-auto px-[5vw] text-center">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -912,7 +697,7 @@ export default function HomePage() {
                 Témoignages
               </p>
               <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl mb-6">
-                Ce que nos clients disent de nous.
+                Ce que disent nos clients.
               </h2>
               <p className="text-sm md:text-base text-white/75 mb-8">
                 Par souci de confidentialité, certains éléments sont anonymisés,
@@ -920,7 +705,7 @@ export default function HomePage() {
               </p>
             </motion.div>
 
-            <div className="grid gap-6 md:grid-cols-3">
+            <div className="grid gap-6 md:grid-cols-5">
               {testimonials.map((item, idx) => (
                 <motion.div
                   key={item.id}
@@ -939,12 +724,17 @@ export default function HomePage() {
                 </motion.div>
               ))}
             </div>
+            <div className="flex items-center justify-center mt-10">
+              <button className="flex items-center btn btn-sm rounded-full gap-2">
+                Voir plus<span aria-hidden="true">&rarr;</span>
+              </button>
+            </div>
           </motion.div>
         </div>
       </section>
 
       {/* ACTUALITÉS */}
-      <section id="actualites" className="py-16 lg:py-20 bg-black/40">
+      <section id="actualites" className="py-16 lg:py-20">
         <div className="w-full max-w-6xl lg:max-w-7xl mx-auto px-[5vw]">
           <motion.div
             initial="hidden"
@@ -970,7 +760,7 @@ export default function HomePage() {
               </div>
               <Link
                 to="/actualites"
-                className="hidden sm:inline-flex text-xs rounded-full border border-white/25 px-4 py-2 hover:border-ba-gold hover:text-ba-gold transition"
+                className="hidden sm:inline-flex text-xs rounded-full border border-white/25 px-4 py-2 hover:bg-emerald-500/30 hover:text-ba-gold transition"
               >
                 Voir toutes les actualités
               </Link>
@@ -1023,69 +813,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* FAQ */}
-      <section id="faq" className="py-16 lg:py-20 bg-ba-navy">
-        <div className="w-full max-w-6xl lg:max-w-7xl mx-auto px-[5vw]">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={staggerContainer}
-          >
-            <motion.div
-              variants={fadeUp}
-              className="text-center max-w-2xl mx-auto mb-8"
-            >
-              <p className="text-sm uppercase tracking-[0.25em] text-ba-gold-soft mb-3">
-                FAQ
-              </p>
-              <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl mb-3">
-                Questions fréquemment posées.
-              </h2>
-              <p className="text-sm md:text-base text-white/75">
-                Si vous ne trouvez pas la réponse à votre question, nous restons
-                disponibles pour y répondre directement.
-              </p>
-            </motion.div>
-
-            <div className="max-w-2xl mx-auto space-y-3">
-              {faqs.map((faq) => {
-                const isOpen = openFaqId === faq.id;
-                return (
-                  <motion.div
-                    key={faq.id}
-                    variants={fadeUp}
-                    className="rounded-2xl border border-white/10 bg-white/5 shadow-soft-xl overflow-hidden"
-                  >
-                    <button
-                      type="button"
-                      onClick={() => setOpenFaqId(isOpen ? null : faq.id)}
-                      className="w-full flex items-center justify-between px-4 sm:px-5 py-3 sm:py-3.5 text-left"
-                      aria-expanded={isOpen}
-                    >
-                      <span className="text-sm sm:text-base font-medium">
-                        {faq.question}
-                      </span>
-                      <span className="ml-3 text-ba-gold text-xl leading-none">
-                        {isOpen ? "–" : "+"}
-                      </span>
-                    </button>
-                    {isOpen && (
-                      <div className="px-4 sm:px-5 pb-4 sm:pb-5 text-xs sm:text-sm text-white/75">
-                        {faq.answer}
-                      </div>
-                    )}
-                  </motion.div>
-                );
-              })}
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
       {/* PARTENAIRES / RÉSEAU */}
-      <section className="py-14 lg:py-16 bg-ba-navy/95">
-        <div className="w-full max-w-6xl lg:max-w-7xl mx-auto px-[5vw]">
+      <section className="flex justify-center py-6 lg:py-16 bg-indigo-50 m-6 shadow-xl/20 rounded-3xl">
+        <div className="w-full max-w-7xl">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -1097,13 +827,13 @@ export default function HomePage() {
               variants={fadeUp}
               className="text-center lg:text-left max-w-lg"
             >
-              <p className="text-sm uppercase tracking-[0.25em] text-ba-gold-soft mb-3">
+              <p className="text-sm uppercase tracking-[0.25em] text-quartio mb-3">
                 Réseau & reconnaissance
               </p>
-              <h2 className="font-serif text-xl sm:text-2xl lg:text-3xl mb-3">
+              <h2 className="font-serif text-xl text-black sm:text-2xl lg:text-3xl mb-3">
                 Un cabinet reconnu dans l’écosystème juridique.
               </h2>
-              <p className="text-sm sm:text-base text-white/75">
+              <p className="text-sm sm:text-base text-black/75">
                 Borgel &amp; Associés travaille en lien avec des associations de
                 victimes, des institutions médicales et des acteurs spécialisés
                 du secteur.
@@ -1112,121 +842,25 @@ export default function HomePage() {
 
             <motion.div
               variants={fadeUp}
-              className="grid grid-cols-2 sm:grid-cols-4 gap-4 w-full lg:w-auto text-center text-[11px] text-white/60"
+              className="grid grid-cols-2 sm:grid-cols-4 gap-4 w-full lg:w-auto text-center text-[11px] text-white/90"
             >
-              <div className="rounded-xl bg-white/5 border border-white/10 px-4 py-3 flex flex-col items-center gap-1">
+              <div className="rounded-xl bg-gray-900/40 border border-white/10 px-4 py-3 flex flex-col items-center gap-1">
                 <Award className="w-4 h-4 text-ba-gold mb-1" />
                 <span>Barreau de Marseille</span>
               </div>
-              <div className="rounded-xl bg-white/5 border border-white/10 px-4 py-3 flex flex-col items-center gap-1">
+              <div className="rounded-xl bg-gray-900/40 border border-white/10 px-4 py-3 flex flex-col items-center gap-1">
                 <Building2 className="w-4 h-4 text-ba-gold mb-1" />
                 <span>Institutions médicales</span>
               </div>
-              <div className="rounded-xl bg-white/5 border border-white/10 px-4 py-3 flex flex-col items-center gap-1">
+              <div className="rounded-xl bg-gray-900/40 border border-white/10 px-4 py-3 flex flex-col items-center gap-1">
                 <Users className="w-4 h-4 text-ba-gold mb-1" />
                 <span>Associations de victimes</span>
               </div>
-              <div className="rounded-xl bg-white/5 border border-white/10 px-4 py-3 flex flex-col items-center gap-1">
+              <div className="rounded-xl bg-gray-900/40 border border-white/10 px-4 py-3 flex flex-col items-center gap-1">
                 <Briefcase className="w-4 h-4 text-ba-gold mb-1" />
                 <span>Partenaires assurances</span>
               </div>
             </motion.div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* CONTACT / CTA */}
-      <section id="contact" className="py-16 lg:py-20 bg-black/50">
-        <div className="w-full max-w-6xl lg:max-w-7xl mx-auto px-[5vw] grid gap-10 lg:grid-cols-[1.1fr,1fr] items-start">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={staggerContainer}
-          >
-            <motion.div variants={fadeUp}>
-              <p className="text-sm uppercase tracking-[0.25em] text-ba-gold-soft mb-2 text-center lg:text-left">
-                Contact
-              </p>
-              <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl mb-4 text-center lg:text-left">
-                Parlez-nous de votre situation.
-              </h2>
-              <p className="text-sm md:text-base text-white/70 mb-6 text-center lg:text-left">
-                Expliquez-nous votre contexte, vos attentes et vos contraintes.
-                Nous revenons vers vous rapidement pour envisager la meilleure
-                stratégie.
-              </p>
-            </motion.div>
-
-            <motion.div variants={fadeUp} className="space-y-4 mb-6">
-              <div className="flex flex-col sm:flex-row sm:items-center gap-3">
-                <div className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-ba-gold/15 text-ba-gold mx-auto sm:mx-0">
-                  <Phone className="w-4 h-4" />
-                </div>
-                <div className="text-center sm:text-left text-sm">
-                  <p className="font-medium">Téléphone</p>
-                  <p className="text-white/70">+33 (0)4 XX XX XX XX</p>
-                </div>
-              </div>
-
-              <div className="flex flex-col sm:flex-row sm:items-center gap-3">
-                <div className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-ba-gold/15 text-ba-gold mx-auto sm:mx-0">
-                  <Mail className="w-4 h-4" />
-                </div>
-                <div className="text-center sm:text-left text-sm">
-                  <p className="font-medium">Email</p>
-                  <p className="text-white/70">contact@borgel-associes.fr</p>
-                </div>
-              </div>
-
-              <div className="flex flex-col sm:flex-row sm:items-center gap-3">
-                <div className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-ba-gold/15 text-ba-gold mx-auto sm:mx-0">
-                  <MapPin className="w-4 h-4" />
-                </div>
-                <div className="text-center sm:text-left text-sm">
-                  <p className="font-medium">Cabinet</p>
-                  <p className="text-white/70">
-                    Marseille — Adresse à préciser
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-
-            <motion.div
-              variants={fadeUp}
-              className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start"
-            >
-              <Link
-                to="/contact"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-ba-gold px-6 py-3 text-sm sm:text-base font-semibold text-ba-navy shadow-soft-xl hover:bg-ba-gold-soft transition"
-              >
-                Envoyer une demande
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-              <button className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 px-6 py-3 text-sm sm:text-base font-medium text-white/80 hover:border-ba-gold hover:text-ba-gold transition">
-                Voir les disponibilités
-                <Clock className="w-4 h-4" />
-              </button>
-            </motion.div>
-          </motion.div>
-
-          {/* Carte / plan d’accès (placeholder, iframe à remplacer si besoin) */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.8 }}
-            className="w-full h-[280px] lg:h-full rounded-2xl overflow-hidden border border-white/10 bg-black/50"
-          >
-            <iframe
-              title="Cabinet Borgel & Associés"
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              loading="lazy"
-              allowFullScreen
-              src="https://www.google.com/maps/embed?pb="
-            />
           </motion.div>
         </div>
       </section>

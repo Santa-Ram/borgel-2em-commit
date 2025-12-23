@@ -15,8 +15,10 @@ import {
   PhoneForwarded,
   MessageCircleQuestionMark,
   ChevronUp,
+  ShieldQuestionMark,
 } from "lucide-react";
 import logo from "../assets/AVOCAT transparent.png";
+import { span } from "motion/react-client";
 
 type MenuKey = "indemnisation" | null;
 
@@ -68,20 +70,24 @@ export default function Navbar() {
       {/* NAVBAR FLOTTANTE */}
       <header
         aria-label="Main navigation"
-        className={`fixed top-10 left-4 right-4 z-[9999] mx-auto max-w-[1400px] pointer-events-auto px-3 transition-all duration-200
-          rounded-full backdrop-blur-md
-          ${scrolled ? "bg-white/80 shadow-lg" : "bg-white/30"}
+        className={`fixed z-[9999] w-full h-16 pointer-events-auto px-10 transition-all duration-200
+         backdrop-blur-md
+          ${
+            scrolled
+              ? "bg-gray-900 backdrop-blur-md shadow-md"
+              : "bg-transparent backdrop-blur-none"
+          }
         `}
       >
         {/* Contenu centré du header */}
         <div className="mx-auto">
-          <div className="flex items-center h-14 justify-between px-3">
+          <div className="flex items-center h-14 justify-between px-1 lg:px-8">
             {/* Left icon (FAQ) */}
             <Link
               to="/faq"
-              className="flex text-quartio text-sm font-medium 1100:hidden items-center gap-2 hover:text-primary-soft transition"
+              className="flex text-white text-sm font-medium 1100:hidden items-center gap-2 hover:text-primary-soft transition"
             >
-              <MessageCircleQuestionMark className="w-6 h-6" />
+              <ShieldQuestionMark className="w-6 h-6 object-bottom" />
             </Link>
 
             {/* Logo centré/gauche */}
@@ -96,14 +102,17 @@ export default function Navbar() {
             {/* Menu desktop */}
             <nav className="hidden 1100:flex items-center justify-center gap-4 flex-1">
               {/* Accueil */}
-              <NavLink to="/" className="px-3 py-1 text-sm font-medium">
+              <NavLink
+                to="/"
+                className="px-3 font-serif py-1 text-sm font-medium"
+              >
                 {({ isActive }) => (
                   <span
                     className={`inline-block relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:transition-all after:duration-300
                     ${
                       isActive
-                        ? "text-quartio after:w-full after:bg-quartio"
-                        : "text-slate-800 hover:text-quartio after:w-0 hover:after:w-full after:bg-quartio"
+                        ? "text-white after:w-full after:bg-white"
+                        : "text-white/80 hover:text-white after:w-0 after:bg-white hover:after:w-full"
                     }
                   `}
                   >
@@ -115,23 +124,47 @@ export default function Navbar() {
               {/* À propos */}
               <NavLink
                 to="/le-cabinet"
-                className="px-3 py-1 text-sm font-medium text-slate-800 hover:text-quartio transition-colors"
+                className="px-3 py-1 text-sm font-serif font-medium text-slate-800 hover:text-quartio transition-colors"
               >
-                À propos
+                {({ isActive }) => (
+                  <span
+                    className={`inline-block relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:transition-all after:duration-300
+                    ${
+                      isActive
+                        ? "text-white after:w-full after:bg-white"
+                        : "text-white/80 hover:text-white after:w-0 after:bg-white hover:after:w-full"
+                    }
+                  `}
+                  >
+                    À propos
+                  </span>
+                )}
               </NavLink>
 
               {/* Notre équipe */}
               <NavLink
                 to="/notre-equipe"
-                className="px-3 py-1 text-sm font-medium text-slate-800 hover:text-quartio transition-colors"
+                className="px-3 py-1 text-sm font-serif font-medium text-slate-800 hover:text-quartio transition-colors"
               >
-                Notre équipe
+                {({ isActive }) => (
+                  <span
+                    className={`inline-block relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:transition-all after:duration-300
+                    ${
+                      isActive
+                        ? "text-white after:w-full after:bg-white"
+                        : "text-white/80 hover:text-white after:w-0 after:bg-white hover:after:w-full"
+                    }
+                  `}
+                  >
+                    Notre équipe
+                  </span>
+                )}
               </NavLink>
 
               {/* Spécialisation (dropdown) */}
               <div className="relative" ref={menuRef}>
                 <button
-                  className="px-3 pt-1 pb-[2px] text-sm font-medium transition-colors flex items-center gap-1"
+                  className="px-3 pt-1 pb-[2px] text-sm font-serif font-medium transition-colors flex items-center gap-1"
                   onClick={() =>
                     setActiveMenu((prev) =>
                       prev === "indemnisation" ? null : "indemnisation"
@@ -145,29 +178,26 @@ export default function Navbar() {
       after:h-[2px] after:transition-all after:duration-300 
       ${
         activeMenu === "indemnisation"
-          ? "text-quartio after:w-full after:bg-quartio"
-          : "text-principale hover:text-quartio after:w-0 after:bg-quartio hover:after:w-full"
+          ? "text-white after:w-full after:bg-white"
+          : "text-white hover:text-white after:w-0 after:bg-white hover:after:w-full"
       }
     `}
                   >
-                    Spécialisation
-                  </span>
-                  <span className="text-[10px] mt-[1px] text-white">
-                    <ChevronUp />
+                    Expertises
                   </span>
                 </button>
 
                 <AnimatePresence>
                   {activeMenu === "indemnisation" && (
                     <motion.div
-                      className="fixed left-0 right-0 top-20 z-40"
+                      className="fixed left-0 right-0 top-15 z-40"
                       variants={dropdownVariants}
                       initial="hidden"
                       animate="visible"
                       exit="exit"
                     >
                       {/* background full width */}
-                      <div className="bg-white/95 backdrop-blur shadow-soft border-t border-emerald-100">
+                      <div className="bg-white/90 backdrop-blur-md shadow-soft rounded-b-xl border-emerald-100">
                         {/* contenu centré, 3 colonnes alignées gauche → centre → droite */}
                         {/* <div className="flex ml-10 text-primary text-xl font-bold px-4 pt-6">
                           <h2>INDEMNISATION DU DOMMAGE CORPOREL</h2>
@@ -412,44 +442,61 @@ export default function Navbar() {
               {/* Actualités juridiques */}
               <NavLink
                 to="/actualites-juridiques"
-                className="px-3 py-1 text-sm font-medium text-slate-800 hover:text-quartio transition-colors"
+                className="px-3 py-1 text-sm font-serif font-medium text-slate-800 hover:text-quartio transition-colors"
               >
-                Actualités juridiques
+                {({ isActive }) => (
+                  <span
+                    className={`inline-block relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:transition-all after:duration-300
+                    ${
+                      isActive
+                        ? "text-white after:w-full after:bg-white"
+                        : "text-white/80 hover:text-white after:w-0 after:bg-white hover:after:w-full"
+                    }
+                  `}
+                  >
+                    Actualités juridiques
+                  </span>
+                )}
               </NavLink>
 
               {/* Nos honoraires */}
               <NavLink
                 to="/honoraires"
-                className="px-3 py-1 text-sm font-medium text-slate-800 hover:text-quartio transition-colors"
+                className="px-3 py-1 text-sm font-serif font-medium text-slate-800 hover:text-quartio transition-colors"
               >
-                Nos honoraires
+                {({ isActive }) => (
+                  <span
+                    className={`inline-block relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:transition-all after:duration-300
+                    ${
+                      isActive
+                        ? "text-white after:w-full after:bg-white"
+                        : "text-white/80 hover:text-white after:w-0 after:bg-white hover:after:w-full"
+                    }
+                  `}
+                  >
+                    Nos honoraires
+                  </span>
+                )}
               </NavLink>
             </nav>
 
             {/* Right icons / contact */}
             <div className="hidden lg:flex items-center gap-3">
-              <Link to="/faq" className="flex items-center">
-                <MessageCircleQuestionMark className="w-6 h-6" />
+              <Link to="/faq" className="hidden 1100:flex items-center">
+                <ShieldQuestionMark className="w-6 h-6 object-bottom" />
               </Link>
               <Link to="/contact" className="flex items-center">
                 <Mail className="w-6 h-6" />
               </Link>
-              {/* Mobile menu button */}
-              <button
-                className="lg:hidden inline-flex items-center justify-center w-9 h-9 rounded-full border border-slate-200"
-                onClick={() => setMobileOpen(true)}
-              >
-                <Menu className="w-4 h-4" />
-              </button>
             </div>
 
             {/* Mobile menu button visible on small screens */}
             <div className="flex lg:hidden items-center">
               <button
-                className="inline-flex text-slate-800 items-center justify-center w-9 h-9 rounded-full border border-slate-200"
+                className="inline-flex text-white items-center justify-center w-9 h-9"
                 onClick={() => setMobileOpen(true)}
               >
-                <Menu className="w-4 h-4" />
+                <Menu className="w-6 h-6" />
               </button>
             </div>
           </div>
@@ -487,7 +534,7 @@ export default function Navbar() {
                 className="text-xs text-slate-500"
                 onClick={() => setMobileOpen(false)}
               >
-                <X className="w-4 h-4" />
+                <X className="w-6 h-6" />
               </button>
             </div>
 
@@ -496,7 +543,7 @@ export default function Navbar() {
                 <li>
                   <NavLink
                     to="/"
-                    className="block py-2"
+                    className="block font-serif text-black py-2"
                     onClick={() => setMobileOpen(false)}
                   >
                     Accueil
@@ -505,7 +552,7 @@ export default function Navbar() {
                 <li className="border-t border-slate-100 pt-2">
                   <NavLink
                     to="/le-cabinet"
-                    className="block py-2"
+                    className="block font-serif text-black py-2"
                     onClick={() => setMobileOpen(false)}
                   >
                     À propos
@@ -514,19 +561,19 @@ export default function Navbar() {
                 <li className="border-t border-slate-100 pt-2">
                   <NavLink
                     to="/notre-equipe"
-                    className="block py-2"
+                    className="block font-serif text-black py-2"
                     onClick={() => setMobileOpen(false)}
                   >
                     Notre équipe
                   </NavLink>
                 </li>
 
-                <li className="border-t border-slate-100 pt-2">
+                <li className="border-t text-black border-slate-100 pt-2">
                   <button
-                    className="w-full flex items-center justify-between py-2 text-left"
+                    className="w-full flex items-center font-serif justify-between py-2 text-left"
                     onClick={() => setMobileIndemnisationOpen((v) => !v)}
                   >
-                    <span>indemnisation</span>
+                    <span>Indemnisation</span>
                     <span className="text-xs">
                       {mobileIndemnisationOpen ? "−" : "+"}
                     </span>
@@ -583,7 +630,7 @@ export default function Navbar() {
                 <li className="border-t border-slate-100 pt-2">
                   <NavLink
                     to="/actualites-juridiques"
-                    className="block py-2"
+                    className="block font-serif text-black py-2"
                     onClick={() => setMobileOpen(false)}
                   >
                     Actualités juridiques
@@ -592,7 +639,7 @@ export default function Navbar() {
                 <li className="border-t border-slate-100 pt-2">
                   <NavLink
                     to="/honoraires"
-                    className="block py-2"
+                    className="block font-serif text-black py-2"
                     onClick={() => setMobileOpen(false)}
                   >
                     Nos honoraires
@@ -605,13 +652,13 @@ export default function Navbar() {
               <Link
                 to="/contact"
                 onClick={() => setMobileOpen(false)}
-                className="w-full inline-flex justify-center items-center text-black text-xs font-medium"
+                className="w-full inline-flex justify-center items-center text-black "
               >
-                <div className="flex gap-4 px-4 py-2">
-                  <Mail className="w-6 h-6" />
-                  <Facebook className="w-6 h-6" />
-                  <Instagram className="w-6 h-6" />
-                  <PhoneForwarded className="w-6 h-6" />
+                <div className="flex gap-8 px-4 py-2">
+                  <Mail className="w-4 h-4 border" />
+                  <Facebook className="w-4 h-4 border" />
+                  <Instagram className="w-4 h-4 border" />
+                  <PhoneForwarded className="w-4 h-4 border" />
                 </div>
               </Link>
             </div>

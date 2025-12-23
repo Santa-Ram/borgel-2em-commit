@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import Section from "../components/Section";
 import emailjs from "@emailjs/browser";
+import SupportCenterSection from "../components/SupportCenterSection";
 
 export default function ContactPage() {
   const formRef = useRef<HTMLFormElement | null>(null);
@@ -52,6 +53,9 @@ export default function ContactPage() {
   return (
     <div>
       {/* Bannière */}
+      <section>
+        <SupportCenterSection />
+      </section>
       <section className="bg-primary text-white">
         <div className="max-w-6xl mx-auto px-4 py-12">
           <h1 className="text-xl md:text-2xl font-semibold mb-2">

@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import Section from "../components/Section";
 import { equipe } from "../data/equipe";
 import TeamCard from "../components/TeamCard";
+import NewsletterSection from "../components/NewsletterSection";
 
 export default function EquipePage() {
   useEffect(() => {
@@ -24,6 +25,9 @@ export default function EquipePage() {
           ))}
         </div>
       </Section>
+      <section>
+        <NewsletterSection/>
+      </section>
     </div>
   );
 }

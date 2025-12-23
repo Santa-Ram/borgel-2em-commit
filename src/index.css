@@ -5,6 +5,8 @@
  
 @theme {
   --breakpoint-1100: 1055px;
+  --breakpoint-1075: 1075px;
+  --breakpoint-775: 775px;
   --color-primary: #00412E;
   --color-primary-second: #272d50;
   --color-primary-soft: #96bf8a;

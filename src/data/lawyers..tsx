@@ -1,3 +1,5 @@
+import imgBorgel from '../assets/alban.jpg'
+
 export const lawyers = [
   {
     slug: "maitre-borgel",
@@ -6,7 +8,7 @@ export const lawyers = [
     speciality: "Droit des affaires & contentieux complexes",
     experience: "20+ ans d’expérience",
     bio: "Maître Borgel accompagne dirigeants et entreprises dans leurs décisions stratégiques et la gestion de leurs risques juridiques, en France et à l’international.",
-    image: "/images/lawyers/borgel.jpg", 
+    image: imgBorgel, 
     badges: ["Stratégie", "Contentieux complexe"],
   },
   {
@@ -16,7 +18,7 @@ export const lawyers = [
     speciality: "Droit du travail",
     experience: "12 ans d’expérience",
     bio: "Intervient en conseil comme en contentieux sur l’ensemble des problématiques liées aux relations individuelles et collectives de travail.",
-    image: "/images/lawyers/dupont.jpg",
+    image: imgBorgel,
     badges: ["Social", "Relations collectives"],
   },
   {
